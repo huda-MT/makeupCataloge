@@ -1,0 +1,50 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+	<div class="row divider blue">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner main">
+		<div class="col-md-1"></div>
+		<div class="col-md-11 padding-none">
+			<h1>Makeup Catalog Application</h1>
+		</div>
+	</div>
+
+	<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+
+
+<div class="container">
+     <h2 >{{makeup_item.name}}</h2>
+    <p class="inline">(<a href = "{{url_for('showCategories', group_id=makeup_item.makeup_id)}}" style="color:black">{{makeup_group.name}}</a>)</p>
+
+
+  <table class="table table-condensed">
+      <tbody>
+      <tr>
+        <th><h3>Price: </h3></th>
+        <td><p >{{makeup_item.price}}</p></td>
+      </tr>
+      <tr>
+        <th><h3>Description: </h3></th>
+        <td><p >{{makeup_item.description}}</p></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+{% endblock %}

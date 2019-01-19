@@ -1,0 +1,76 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+<div class="row divider green">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner menu">
+		<div class="col-md-11 col-md-offset-1 padding-none">
+			<h1>Edit Makeup Item
+			<figure class="creator">
+				<img src="{{ url_for('static', filename='blank_user.gif') }}">
+
+			</figure>
+			</h1>
+
+		</div>
+	</div>
+<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+<div class="row">
+		<div class="col-md-6 col-md-offset-1 padding-top">
+			<form action="{{url_for('editItem' ,group_id=group_id, mkup_id=mkup_id, editedMakeup=editedMakeup)}}" method = "post">
+				<div class="form-group">
+
+					<label for="name">Name:</label>
+                    <input type="text" maxlength="100" class="form-control" name="name"  placeholder = '{{editedMakeup.name}}'>
+
+
+					<label for="price">Price:</label>
+						<input type ="text" maxlength="10" class="form-control" name="price" placeholder = "{{editedMakeup.price}}">
+
+
+                    <label for="description">Description:</label>
+					<textarea class="form-control" maxlength="250" rows="5" name="description">{{editedMakeup.description}}</textarea>
+
+                    <p>Makeup Groups:</p>
+                      <select name="group_id">
+                        <option value="" selected="selected"></option>
+                        <option value=1 >Face</option>
+                        <option value=2 >Eyes</option>
+                        <option value=3 >Lips</option>
+                        <option value=4 >Cheek</option>
+                      </select>
+                      </br></br>
+
+
+					<button type="submit" class="btn btn-default" id="submit" type="submit">
+					   <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        Update
+                    </button>
+
+					<a href = "{{url_for('showItem',group_id=group_id, mkup_id=mkup_id)}}" class="btn btn-default delete">
+
+						  <span class="glyphicon glyphicon-remove" aria-hidden="true">
+                            </span>
+                            Cancel
+
+					</a>
+				</div>
+			</form>
+		</div>
+</div>
+
+{% endblock %}
